@@ -1,0 +1,142 @@
+openapi: 3.0.0
+servers:
+  - description: Payment Service
+    url: http://localhost:8080/api/v1
+
+info:
+  version: "1.0.0"
+  title: Payment Service API
+  description: >-
+
+security:
+  - bearerAuth: []
+
+paths:
+  /payments:
+    post:
+      summary: Create a new payment
+      operationId: createPayment
+      tags:
+        - Payment
+      requestBody:
+        description: Create a payment intent
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payment'
+      responses:
+        '200':
+          description: Payment intent info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentIntent'
+        '400':
+          $ref: '#/components/responses/UnauthorizationResponse'
+        '401':
+          $ref: '#/components/responses/BadRequestResponse'
+        '500':
+          $ref: '#/components/responses/InternalExceptionResponse'
+
+components:
+  schemas:
+    PaymentGateway:
+      type: string
+      enum:
+        - Stripe
+
+    Payment:
+      type: object
+      properties:
+        gateway:
+          $ref: '#/components/schemas/PaymentGateway'
+        order:
+          $ref: '#/components/schemas/Order'
+        additionalProperties:
+          type: string
+
+    Order:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        amount:
+          type: number
+          format: double
+        currency:
+          type: string
+
+    PaymentIntent:
+      type: object
+      additionalProperties: true
+
+
+    RestError:
+      type: object
+      properties:
+        code:
+          type: string
+          description: error code
+        status:
+          type: string
+          description: http status
+        message:
+          type: string
+          description: human readable message
+        additionalInfo:
+          type: string
+
+    BooleanResponse:
+      type: object
+      properties:
+        code:
+          type: string
+        status:
+          type: boolean
+        message:
+          type: string
+
+  parameters:
+    BookIdPathParam:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+        format: int64
+
+  responses:
+    BooleanStatusResponse:
+      description: Boolean status
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BooleanResponse'
+    InternalExceptionResponse:
+      description: Internal Exception
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RestError'
+
+    BadRequestResponse:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RestError'
+
+    UnauthorizationResponse:
+      description: Unauthorization
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RestError'
+
+  securitySchemes:
+    bearerAuth: # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

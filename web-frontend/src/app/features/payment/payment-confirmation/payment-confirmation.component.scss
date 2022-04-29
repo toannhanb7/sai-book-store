@@ -1,0 +1,13 @@
+.payment-confirmation {
+  width: 500px;
+  margin: 0 auto;
+  padding-top: 15px;
+
+  .mat-card-actions {
+    text-align: right;
+
+    button {
+      min-width: 150px;
+    }
+  }
+}

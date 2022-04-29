@@ -1,0 +1,48 @@
+spring:
+  application:
+    name: payment-service
+  cloud:
+    kubernetes:
+      enabled: false
+  datasource:
+    url: jdbc:mariadb://127.0.0.1:3306/payment_service
+
+    username: root
+    password: mysql
+    driverClassName: org.mariadb.jdbc.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.MariaDBDialect
+    show-sql: false
+#    propereties:
+#      hibernate:
+#        dialect:
+    hibernate:
+      ddl-auto: update
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+      use-new-id-generator-mappings: false
+
+server:
+  error:
+    include-message: always
+
+  port: 18084
+
+
+
+logging:
+  level:
+    org:
+      springframework: info
+
+
+feign:
+  client:
+    config:
+      default:
+        errorDecoder: com.saidigital.bookstore.base.decoder.FeignErrorDecoder
+
+payment:
+  provider:
+    stripe:
+      api-key: sk_test_51KtekkBtxu8n14UcfC5CPtQSEIJNJzIW38bztaWyYshGsUeDbClNqN7CGBdcqVXRtJnWQMNAXP5oqUYOxhwjPjc400XsLS6H0O

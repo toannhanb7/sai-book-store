@@ -1,0 +1,9 @@
+<form novalidate (ngSubmit)="submitPayment()" [formGroup]="paymentInfo">
+  <ng-container *ngIf="elementsOptions?.clientSecret as clientSecret">
+    <ngx-stripe-payment [clientSecret]="clientSecret">
+    </ngx-stripe-payment>
+  </ng-container>
+  <button mat-raised-button type="submit" color="warn" class="btn-pay">
+    Pay
+  </button>
+</form>

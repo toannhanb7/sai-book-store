@@ -1,0 +1,14 @@
+{
+  "/api/v1/book*": {
+    "target": "http://localhost:18083",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/api/v1/payment*": {
+    "target": "http://localhost:18084",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  }
+}

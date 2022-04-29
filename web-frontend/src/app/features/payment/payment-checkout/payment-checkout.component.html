@@ -1,0 +1,47 @@
+<div class="payment-checkout">
+  <div class="book-details">
+    <mat-table [dataSource]="books">
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef>
+          Name
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{element.name}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="author">
+        <mat-header-cell *matHeaderCellDef>Author</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{element.author}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{element.description}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="price">
+        <mat-header-cell *matHeaderCellDef>Price</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{element.price}} {{element.currency | uppercase}}
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+  </div>
+  <div class="price-details">
+    Total price: {{totalAmount}} USD
+  </div>
+  <div class="payment-section" *ngIf="totalAmount > 0">
+    <div class="stripe-payment">
+      <stripe-payment [paymentId]="paymentId"></stripe-payment>
+    </div>
+  </div>
+</div>

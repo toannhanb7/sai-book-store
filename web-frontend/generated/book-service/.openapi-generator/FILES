@@ -1,0 +1,15 @@
+.gitignore
+README.md
+api.module.ts
+api/api.ts
+api/book.service.ts
+configuration.ts
+encoder.ts
+git_push.sh
+index.ts
+model/book.ts
+model/bookGetAll.ts
+model/booleanResponse.ts
+model/models.ts
+model/restError.ts
+variables.ts

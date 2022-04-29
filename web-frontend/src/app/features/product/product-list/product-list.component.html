@@ -1,0 +1,26 @@
+<mat-grid-list cols="4" rowHeight="350px">
+  <mat-grid-tile *ngFor="let book of books" class="product-list-item">
+    <mat-card class="product-card">
+      <mat-card-header class="product-name">
+        <mat-card-title>{{book.name}}</mat-card-title>
+        <mat-card-subtitle>{{book.author}}</mat-card-subtitle>
+      </mat-card-header>
+      <div class="product-image">
+      <img mat-card-image src="{{book.image}}">
+      </div>
+      <mat-card-content>
+        <div class="book-description">
+          {{book.description}}
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" *ngIf="!existInCart(book)" (click)="addToCart(book)">Add to Cart - {{book.price}} {{book.currency | uppercase}}</button>
+        <button mat-raised-button color="warn" *ngIf="existInCart(book)" (click)="removeFromCart(book)">Remove from Cart</button>
+      </mat-card-actions>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
+<div class="checkout-area">
+  <button mat-raised-button color="primary" [disabled]="cartItemCount <= 0" (click)="processCheckout()">Checkout ({{cartItemCount}})</button>
+</div>
+

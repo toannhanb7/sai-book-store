@@ -1,0 +1,16 @@
+<div class="payment-confirmation">
+<mat-card class="payment-confirmation-card">
+  <mat-card-header class="order-info-name">
+    <mat-card-title>Payment Summary</mat-card-title>
+    <mat-card-subtitle></mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <div>Amount: {{amount}} {{currency | uppercase}}</div>
+    <div>Reference id: {{referenceId}}</div>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button routerLink="/" color="primary">Back</button>
+  </mat-card-actions>
+</mat-card>
+
+</div>

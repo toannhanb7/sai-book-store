@@ -1,0 +1,17 @@
+.payment-checkout {
+  text-align: center;
+  .price-details {
+    text-align: right;
+    padding-right: 10px;
+    font-weight: bold;
+  }
+
+  .payment-section {
+    text-align: center;
+    .stripe-payment {
+      width: 500px;
+      margin: 0 auto;
+    }
+
+  }
+}
